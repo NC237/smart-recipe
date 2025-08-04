@@ -21,19 +21,19 @@ const ProfileStickyBanner = ({ userHasRecipes }: { userHasRecipes: boolean }) =>
     if (!isVisible) return null; // Don't render if dismissed
   
     return (
-      <div className="sticky top-16 mt-2 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md shadow-md flex items-center justify-between">
+      <div className="sticky top-16 mt-2 bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-400 text-yellow-800 p-6 rounded-xl shadow-lg flex items-center justify-between border border-yellow-200">
         <div>
-          <p className="font-semibold text-lg">👩‍🍳 Ready to Cook?</p>
-          <p>Create your first recipe now and share your culinary ideas!</p>
+          <p className="font-bold text-xl mb-2">👩‍🍳 Ready to Start Cooking?</p>
+          <p className="text-yellow-700 mb-3">Create your first AI-generated recipe and share your culinary creativity with the world!</p>
           <button
-            className="mt-2 bg-brand-500 text-white px-3 py-2 rounded-md hover:bg-brand-600 transition"
+            className="bg-gradient-to-r from-brand-500 to-brand-600 text-white px-6 py-3 rounded-xl hover:from-brand-600 hover:to-brand-700 transition-all transform hover:scale-105 font-semibold shadow-md"
             onClick={() => router.push('/CreateRecipe')}
           >
-            🍽️ Create a Recipe
+            🍽️ Create Your First Recipe
           </button>
         </div>
-        <button onClick={dismissBanner} className="ml-4 text-yellow-600 hover:text-yellow-800" aria-label='close'>
-          <XMarkIcon className="h-6 w-6" />
+        <button onClick={dismissBanner} className="ml-6 text-yellow-600 hover:text-yellow-800 hover:bg-yellow-200 rounded-full p-2 transition-all" aria-label='close'>
+          <XMarkIcon className="h-5 w-5" />
         </button>
       </div>
     );
