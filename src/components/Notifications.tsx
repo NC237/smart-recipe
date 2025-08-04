@@ -75,40 +75,48 @@ const Notifications = ({ screen }: NotificationProps) => {
                 )}
             </PopoverButton>
             <PopoverPanel
-                className={`${height <= 750 ? 'absolute right-8 top-0 -mt-32' : 'absolute right-0 mt-2'} w-80 rounded-lg bg-white shadow-lg ring-1 ring-black/10 z-header`}
+                className={`${height <= 750 ? 'absolute right-8 top-0 -mt-32' : 'absolute right-0 mt-2'} w-80 rounded-2xl bg-white shadow-xl ring-1 ring-black/10 z-header border border-gray-200`}
             >
-                <div className="p-4">
+                <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-bold text-gray-800">Notifications</h3>
+                        {unreadCount > 0 && (
+                            <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                {unreadCount} new
+                            </span>
+                        )}
+                    </div>
                     {loading && <p className="text-sm text-gray-500">Loading notifications...</p>}
                     {error && <p className="text-sm text-red-500">{error}</p>}
                     {!loading && !error && latestNotifications.length > 0 && (
-                        <ul className="divide-y divide-gray-200">
+                        <ul className="divide-y divide-gray-100 space-y-1">
                             {latestNotifications.map(({ _id, read, message, recipeId }) => (
                                 <li
                                     key={_id}
-                                    className={`py-3 px-2 flex items-start space-x-3 rounded-md hover:bg-gray-100 ${read ? 'text-gray-500' : 'text-gray-800 font-bold'
+                                    className={`py-4 px-3 flex items-start space-x-3 rounded-xl hover:bg-gray-50 transition-colors ${read ? 'text-gray-500' : 'text-gray-800 font-semibold'
                                         }`}
                                 >
                                     {/* Icon for read/unread */}
-                                    <div className="flex-shrink-0 flex items-center justify-center h-8 w-8">
+                                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-gray-100">
                                         {read ? (
-                                            <CheckIcon className="h-5 w-5 text-brand-500" />
+                                            <CheckIcon className="h-5 w-5 text-green-500" />
                                         ) : (
-                                            <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                                            <ExclamationCircleIcon className="h-5 w-5 text-brand-500" />
                                         )}
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-sm">{message}</p>
-                                        <div className="flex space-x-2 mt-1">
+                                        <p className="text-sm leading-relaxed">{message}</p>
+                                        <div className="flex space-x-3 mt-2">
                                             {!read && (
                                                 <button
-                                                    className="text-xs text-brand-500 hover:underline"
+                                                    className="text-xs text-brand-600 hover:text-brand-700 font-medium hover:underline transition-colors"
                                                     onClick={() => markAsRead(_id)}
                                                 >
                                                     Mark as Read
                                                 </button>
                                             )}
                                             <button
-                                                className="text-xs text-brand-500 hover:underline"
+                                                className="text-xs text-gray-600 hover:text-gray-800 font-medium hover:underline transition-colors"
                                                 onClick={() => router.push(`/RecipeDetail?recipeId=${recipeId}`)}
                                             >
                                                 View Recipe
@@ -121,14 +129,17 @@ const Notifications = ({ screen }: NotificationProps) => {
                     )}
                     {notifications.length > 5 && (
                         <button
-                            className="mt-4 w-full text-sm text-brand-500 hover:text-brand-700"
+                            className="mt-6 w-full text-sm text-brand-600 hover:text-brand-700 font-semibold py-2 px-4 rounded-xl hover:bg-brand-50 transition-all"
                             onClick={() => router.push('/NotificationsPage')}
                         >
                             See All Notifications
                         </button>
                     )}
                     {!loading && !error && notifications.length === 0 && (
-                        <p className="text-sm text-gray-500">You have no notifications.</p>
+                        <div className="text-center py-8">
+                            <div className="text-4xl mb-2">🔔</div>
+                            <p className="text-sm text-gray-500">No notifications yet</p>
+                        </div>
                     )}
                 </div>
             </PopoverPanel>

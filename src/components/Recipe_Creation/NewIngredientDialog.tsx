@@ -92,42 +92,47 @@ function NewIngredientDialog({ ingredientList, updateIngredientList }: NewIngred
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center px-5 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-full hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 shadow-md transition duration-300">
+        className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-brand-600 to-brand-700 text-white text-sm font-semibold rounded-xl hover:from-brand-700 hover:to-brand-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 shadow-md transition-all duration-300 transform hover:scale-105">
         <PlusCircleIcon className="block mr-2 h-6 w-6" />
         Add New Ingredient
       </Button>
       <Dialog open={isOpen} onClose={() => { }} className="relative z-modal">
         <DialogBackdrop className="fixed inset-0 bg-black/50" />
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-lg">
-            <DialogTitle className="text-xl font-bold">Add New Ingredient</DialogTitle>
-            <Description className="text-sm text-gray-500">If you can&apos;t find your ingredient in the list, enter its name here. We&apos;ll validate it before adding to the database.</Description>
+          <DialogPanel className="max-w-lg space-y-6 border bg-white p-8 rounded-2xl shadow-2xl">
+            <div className="text-center">
+              <DialogTitle className="text-2xl font-bold text-gray-800 mb-2">Add New Ingredient</DialogTitle>
+              <Description className="text-gray-600">If you can&apos;t find your ingredient in the list, enter its name here. We&apos;ll validate it before adding to the database.</Description>
+            </div>
             <Field className="mb-4">
-              <Label htmlFor="ingredientName" className="block text-sm font-medium text-gray-700">Ingredient Name</Label>
+              <Label htmlFor="ingredientName" className="block text-sm font-semibold text-gray-700 mb-2">Ingredient Name</Label>
               <Input
                 type="text"
                 id="ingredientName"
                 name="ingredientName"
                 className={clsx(
-                  'mt-3 block w-full rounded-lg border-none bg-black/5 py-1.5 px-3 text-sm/6 text-black',
-                  'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+                  'mt-2 block w-full rounded-xl border-2 border-gray-200 bg-gray-50 py-3 px-4 text-sm text-black',
+                  'focus:outline-none focus:border-brand-500 focus:bg-white transition-all'
                 )}
                 value={ingredientName}
                 onChange={handleInputChange}
+                placeholder="e.g., Tomatoes, Basil, Olive Oil"
               />
             </Field>
-            <div className="text-red-400 font-bold mb-2" style={{ whiteSpace: 'pre-line' }}>
-              <span>{message}</span>
-            </div>
+            {message && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-xl" style={{ whiteSpace: 'pre-line' }}>
+                <span className="text-red-600 font-medium">{message}</span>
+              </div>
+            )}
             {isLoading ? <Loading /> :
-              <div className="flex gap-4 flex-end">
-                <Button className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400" onClick={() => setIsOpen(false)}>Cancel</Button>
+              <div className="flex gap-4 justify-end pt-4">
+                <Button className="bg-gray-200 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-300 font-semibold transition-all" onClick={() => setIsOpen(false)}>Cancel</Button>
                 <Button
-                  className="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 data-[disabled]:bg-gray-200"
+                  className="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-6 py-3 rounded-xl hover:from-brand-700 hover:to-brand-800 font-semibold transition-all data-[disabled]:bg-gray-200 shadow-md"
                   onClick={handleSubmit}
                   disabled={!ingredientName.trim() || isDisabled}
                 >
-                  Submit
+                  Add Ingredient
                 </Button>
               </div>}
           </DialogPanel>

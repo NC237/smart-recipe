@@ -48,43 +48,49 @@ const ReviewComponent = ({
 
   return (
     <div
-      className="w-full p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-stone-100 shadow-md rounded-xl animate-fadeInUp overflow-y-auto"
+      className="w-full p-6 sm:p-8 bg-white shadow-lg rounded-2xl animate-fadeInUp overflow-y-auto border border-gray-200"
       style={{ maxHeight: height - 160 }}
     >
       <div className="px-1 py-1">
         {/* Enhanced Title */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-medium text-gray-800 sm:text-3xl">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-3 flex items-center justify-center gap-3">
+            <span className="text-3xl">👨‍🍳</span>
             {showButtons ? 'Review Your Selections' : 'Submit Your Recipe Choices'}
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-base text-gray-600 max-w-2xl mx-auto">
             {showButtons
               ? ingredients.length >= 3 ? 'Make sure everything looks right before we start cooking!' : ''
               : "Here's a recap of your choices. Use the switch on each recipe generated to select the recipes you want to submit."}
           </p>
           {ingredients.length < 3 && (
-            <p className="text-sm text-red-500 mt-2">
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl">
+              <p className="text-red-600 font-medium">
               Please select at least 3 ingredients to proceed with recipe creation.
-            </p>
+              </p>
+            </div>
           )}
         </div>
 
         {/* Ingredients Section */}
-        <div className="mb-6">
-          <h3 className="text-gray-700 font-semibold text-lg mb-2">{`${ingredients.length} Ingredient${ingredients.length !== 1 ? 's:' : ':'}`}</h3>
+        <div className="mb-8 p-6 bg-gradient-to-r from-brand-50 to-brand-100 rounded-xl border border-brand-200">
+          <h3 className="text-gray-800 font-bold text-lg mb-4 flex items-center gap-2">
+            <span className="text-xl">🥘</span>
+            {`${ingredients.length} Ingredient${ingredients.length !== 1 ? 's' : ''}`}
+          </h3>
           <ul
-            className="flex flex-wrap gap-2 w-full sm:max-h-none sm:overflow-y-visible overflow-y-auto"
+            className="flex flex-wrap gap-3 w-full sm:max-h-none sm:overflow-y-visible overflow-y-auto"
             style={{ maxHeight: height <= 800 ? '60px' : '150px' }}
           >
             {ingredients.map((ingredient) => (
               <li
                 key={ingredient.id}
-                className="flex items-center bg-brand-100 text-brand-800 text-sm font-medium px-3 py-1 rounded-full"
+                className="flex items-center bg-white text-brand-800 text-sm font-semibold px-4 py-2 rounded-full border-2 border-brand-300 shadow-sm"
               >
-                <CheckCircleIcon className="w-4 h-4 mr-1 text-brand-600" aria-hidden="true" />
+                <CheckCircleIcon className="w-4 h-4 mr-2 text-brand-600" aria-hidden="true" />
                 {ingredient.name}
                 {ingredient.quantity && (
-                  <span className="ml-1 text-xs text-brand-600">
+                  <span className="ml-2 text-xs text-brand-600 font-normal">
                     ({ingredient.quantity})
                   </span>
                 )}
@@ -94,12 +100,13 @@ const ReviewComponent = ({
         </div>
 
         {/* Dietary Preferences Section */}
-        <div className="mb-6">
-          <h3 className="text-gray-700 font-semibold text-lg mb-2">
-            {`${dietaryPreference.length} Dietary Preference${dietaryPreference.length !== 1 ? 's:' : ':'}`}
+        <div className="mb-8 p-6 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl border border-purple-200">
+          <h3 className="text-gray-800 font-bold text-lg mb-4 flex items-center gap-2">
+            <span className="text-xl">🥗</span>
+            {`${dietaryPreference.length} Dietary Preference${dietaryPreference.length !== 1 ? 's' : ''}`}
           </h3>
           <div
-            className="flex flex-wrap gap-2 overflow-y-auto"
+            className="flex flex-wrap gap-3 overflow-y-auto"
             style={{ maxHeight: '70px' }}
           >
             {dietaryPreference.map((preference) => {
@@ -107,9 +114,9 @@ const ReviewComponent = ({
               return (
                 <span
                   key={preference}
-                  className="flex items-center bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full"
+                  className="flex items-center bg-white text-purple-800 text-sm font-semibold px-4 py-2 rounded-full border-2 border-purple-300 shadow-sm"
                 >
-                  <Icon className="w-4 h-4 mr-1 text-brand-600" aria-hidden="true" />
+                  <Icon className="w-4 h-4 mr-2 text-purple-600" aria-hidden="true" />
                   {preference}
                 </span>
               );
@@ -118,32 +125,32 @@ const ReviewComponent = ({
         </div>
 
         {showButtons && (
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
             {/* Edit Button */}
             <Button
               onClick={onEdit}
-              className={`flex items-center justify-center bg-gray-200 text-gray-700
-                px-2 py-2 sm:px-4 sm:py-2
-                rounded-full transition duration-300 ease-in-out transform
-                hover:bg-gray-300 hover:shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-500
+              className={`flex items-center justify-center bg-gray-100 text-gray-700
+                px-6 py-3
+                rounded-xl font-semibold transition-all duration-300 transform
+                hover:bg-gray-200 hover:shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 border border-gray-300
                 ${generatedRecipes.length ? 'cursor-not-allowed opacity-50' : ''}`}
               disabled={Boolean(generatedRecipes.length)}
               aria-label="Edit your selections"
             >
               <PencilIcon
-                className="w-4 h-4 mr-1 sm:w-5 sm:h-5 sm:mr-2"
+                className="w-4 h-4 mr-2"
                 aria-hidden="true"
               />
-              <span className="text-sm sm:text-base">Edit</span>
+              <span>Edit Selections</span>
             </Button>
 
             {/* Create Recipes Button */}
             <Button
               onClick={onSubmit}
-              className={`flex items-center justify-center bg-brand-600 text-white
-                px-2 py-2 sm:px-4 sm:py-2
-                rounded-full transition duration-300 ease-in-out transform
-                hover:bg-brand-700 hover:shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-500
+              className={`flex items-center justify-center bg-gradient-to-r from-brand-600 to-brand-700 text-white
+                px-8 py-3
+                rounded-xl font-bold transition-all duration-300 transform
+                hover:from-brand-700 hover:to-brand-800 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-md
                 ${ingredients.length < 3 || generatedRecipes.length
                 ? 'cursor-not-allowed opacity-50'
                 : ''
@@ -151,9 +158,9 @@ const ReviewComponent = ({
               disabled={ingredients.length < 3 || Boolean(generatedRecipes.length)}
               aria-label="Create recipes based on your selections"
             >
-              <span className="text-sm sm:text-base">Create Recipes</span>
+              <span>Create Amazing Recipes</span>
               <ChevronRightIcon
-                className="w-4 h-4 ml-1 sm:w-5 sm:h-5 sm:ml-2"
+                className="w-5 h-5 ml-2"
                 aria-hidden="true"
               />
             </Button>

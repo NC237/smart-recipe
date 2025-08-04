@@ -19,14 +19,14 @@ const SearchBar = ({ searchVal, setSearchVal, handleSearch, totalRecipes }: Sear
     };
 
     return (
-        <div className="w-full max-w-screen-lg flex items-center justify-between p-4 mt-4 rounded-full shadow-md bg-brand-50 border border-brand-300">
+        <div className="w-full max-w-screen-lg flex items-center justify-between p-2 mt-4 rounded-2xl shadow-lg bg-white border-2 border-gray-200 hover:border-brand-300 transition-all">
             <div className="relative w-full flex items-center">
                 {/* Magnifying Glass Icon */}
-                <MagnifyingGlassIcon className="absolute left-3 h-5 w-5 text-brand-700" />
+                <MagnifyingGlassIcon className="absolute left-4 h-5 w-5 text-gray-400" />
 
                 {/* Input Field */}
                 <input
-                    className="w-full pl-10 pr-10 py-2 text-sm text-gray-700 placeholder-gray-600 bg-transparent border-none rounded-full focus:outline-none focus:ring-2 focus:ring-brand-200"
+                    className="w-full pl-12 pr-12 py-3 text-sm text-gray-700 placeholder-gray-500 bg-transparent border-none rounded-2xl focus:outline-none"
                     placeholder={width < 565 ? 'Search recipes...' : 'Search recipes by name, ingredient, or type...'}
                     value={searchVal}
                     onChange={(e) => setSearchVal(e.target.value)}
@@ -35,15 +35,15 @@ const SearchBar = ({ searchVal, setSearchVal, handleSearch, totalRecipes }: Sear
 
                 {/* Clear Button (X Icon) */}
                 {searchVal.trim() && (
-                    <div className="absolute right-3 flex items-center space-x-1">
+                    <div className="absolute right-4 flex items-center space-x-2">
                         <button
-                            className="text-gray-500 hover:text-brand-700 focus:outline-none"
+                            className="text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
                             onClick={() => setSearchVal('')}
                         >
-                            <XMarkIcon className="h-6 w-6 text-brand-700" />
+                            <XMarkIcon className="h-5 w-5" />
                         </button>
                         {
-                            totalRecipes > 0 && <span className="text-sm text-gray-500 font-bold">{`(${totalRecipes})`}</span>
+                            totalRecipes > 0 && <span className="text-xs text-gray-500 font-semibold bg-gray-100 px-2 py-1 rounded-full">{totalRecipes}</span>
                         }
                     </div>
                 )}
@@ -51,7 +51,7 @@ const SearchBar = ({ searchVal, setSearchVal, handleSearch, totalRecipes }: Sear
 
             {/* Search Button */}
             <button
-                className="ml-4 px-4 py-2 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-full focus:ring-4 focus:outline-none focus:ring-brand-200 transition-all duration-200"
+                className="ml-3 px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 rounded-xl focus:ring-4 focus:outline-none focus:ring-brand-200 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
                 onClick={handleSearch}
             >
                 Search

@@ -119,22 +119,34 @@ function Navigation({
       fullHeight
     />
   ) : (
-    <div className="min-h-screen bg-gradient-to-r from-brand-50 to-white p-4 md:p-8 flex justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-brand-50 p-4 md:p-8 flex justify-center">
       <div className={`w-full space-y-4 ${generatedRecipes.length ? 'max-w-7xl' : 'max-w-2xl'}`}> 
+        {/* Header Section */}
+        {generatedRecipes.length === 0 && (
+          <div className="text-center py-8">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent mb-4">
+              Create Your Perfect Recipe
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Follow these simple steps to generate personalized recipes using AI
+            </p>
+          </div>
+        )}
+        
         {generatedRecipes.length === 0 ? (
           steps.slice(0, 3).map((title, idx) => (
-            <div key={title} className="bg-white shadow rounded-xl">
+            <div key={title} className="bg-white shadow-lg rounded-2xl border border-gray-200 overflow-hidden">
               <button
-                className={`w-full flex items-center justify-between p-4 font-medium text-left`}
+                className={`w-full flex items-center justify-between p-6 font-semibold text-left hover:bg-gray-50 transition-colors ${step === idx ? 'bg-brand-50' : ''}`}
                 onClick={() => setStep(step === idx ? -1 : idx)}
               >
-                <span>{`Step ${idx + 1}: ${title}`}</span>
+                <span className="text-lg text-gray-800">{`Step ${idx + 1}: ${title}`}</span>
                 <ChevronDownIcon
-                  className={`w-5 h-5 transform transition-transform ${step === idx ? 'rotate-180' : ''}`}
+                  className={`w-6 h-6 text-brand-600 transform transition-transform duration-300 ${step === idx ? 'rotate-180' : ''}`}
                 />
               </button>
               {step === idx && (
-                <div className="p-4">
+                <div className="p-6 border-t border-gray-100">
                   {isLoading ? (
                     <Loading isProgressBar isComplete={isComplete} loadingType={loadingType} />
                   ) : (
@@ -156,8 +168,8 @@ function Navigation({
           ))
         ) : (
           <>
-            <div className="bg-white shadow rounded-xl">
-              <div className="p-4">
+            <div className="bg-white shadow-lg rounded-2xl border border-gray-200">
+              <div className="p-6">
                 <ReviewComponent
                   ingredients={ingredients}
                   dietaryPreference={preferences}
@@ -167,7 +179,7 @@ function Navigation({
                 />
               </div>
             </div>
-            <div className="bg-white shadow rounded-xl p-4">
+            <div className="bg-white shadow-lg rounded-2xl border border-gray-200 p-6">
               {isLoading ? (
                 <Loading isProgressBar isComplete={isComplete} loadingType={loadingType} />
               ) : (

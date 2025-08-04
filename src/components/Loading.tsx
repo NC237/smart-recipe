@@ -85,34 +85,33 @@ const Loading = ({
     // 🚀 Responsive Progress Bar
     if (isProgressBar) {
         return (
-            <div className="flex flex-col items-center justify-center mt-5 px-4 w-full">
-                <div className="w-full max-w-lg sm:max-w-md bg-gray-300 rounded-full h-6 shadow-lg relative overflow-hidden">
+            <div className="flex flex-col items-center justify-center mt-8 px-4 w-full">
+                <div className="w-full max-w-lg bg-gray-200 rounded-full h-3 shadow-inner relative overflow-hidden">
                     <div
-                        className="h-6 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 shadow-md animate-pulse"
+                        className="h-3 rounded-full bg-gradient-to-r from-brand-500 via-brand-600 to-purple-600 shadow-sm transition-all duration-500 ease-out"
                         role="progressbar"
                         aria-valuenow={progress}
                         aria-valuemin={0}
                         aria-valuemax={100}
                         style={{
                             width: `${progress}%`,
-                            transition: 'width 0.5s ease-in-out',
                         }}
                     />
                 </div>
-                <p className="mt-4 text-lg font-semibold text-gray-800 animate-pulse text-center px-2">
+                <p className="mt-6 text-lg font-medium text-gray-700 text-center px-2 max-w-md">
                     {currentMessage}
                 </p>
-                <p className="mt-1 text-sm text-gray-500">{progress}% completed</p>
+                <p className="mt-2 text-sm font-semibold text-brand-600">{progress}% completed</p>
             </div>
         );
     }
 
     // Default Spinner for Other Scenarios
     return (
-        <div className="flex items-center justify-center mt-5">
+        <div className="flex items-center justify-center py-8">
             <div className="relative">
-                <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
-                <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
+                <div className="h-16 w-16 rounded-full border-4 border-gray-200"></div>
+                <div className="absolute top-0 left-0 h-16 w-16 rounded-full border-4 border-transparent border-t-brand-500 border-r-brand-500 animate-spin"></div>
             </div>
         </div>
     );

@@ -12,10 +12,10 @@ const initialComboIngredient: ComboIngredient = { id: 0, name: '' };
 
 const Chip = ({ ingredient, onDelete }: { ingredient: Ingredient; onDelete: (id: string) => void }) => {
     return (
-        <div className="flex items-center bg-brand-500 text-white text-sm font-medium px-3 py-1.5 rounded-full m-1 transition transform hover:scale-105">
+        <div className="flex items-center bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-medium px-4 py-2 rounded-full transition-all transform hover:scale-105 hover:shadow-md">
             <span>{`${ingredient.name}${ingredient.quantity ? ` (${ingredient.quantity})` : ''}`}</span>
-            <button onClick={() => onDelete(ingredient.id)} className="ml-2 focus:outline-none">
-                <XMarkIcon className="w-4 h-4 text-white hover:text-gray-200" />
+            <button onClick={() => onDelete(ingredient.id)} className="ml-2 focus:outline-none hover:bg-white/20 rounded-full p-1 transition-colors">
+                <XMarkIcon className="w-3 h-3 text-white" />
             </button>
         </div>
     );
@@ -149,7 +149,7 @@ export default function IngredientForm({
 
     return (
         <div
-            className="w-full p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-stone-100 shadow-md rounded-xl animate-fadeInUp"
+            className="w-full p-6 sm:p-8 bg-white shadow-lg rounded-2xl animate-fadeInUp border border-gray-200"
         >
             {/* Enhanced "Add New Ingredient" Button */}
             <div className="flex justify-end w-full">
@@ -165,24 +165,32 @@ export default function IngredientForm({
                     generatedRecipes={generatedRecipes}
                 />
                 <div className="mt-3">
-                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden shadow-inner">
                         <div
-                            className="h-full bg-brand-500 transition-all"
+                            className="h-full bg-gradient-to-r from-brand-500 to-brand-600 transition-all duration-500 ease-out rounded-full"
                             style={{ width: `${progressPercent}%` }}
                         />
                     </div>
-                    <p className="text-right text-xs text-gray-500 mt-1">{ingredients.length}/10 ingredients selected</p>
+                    <div className="flex justify-between items-center mt-2">
+                        <p className="text-xs text-gray-500">Ingredient Selection</p>
+                        <p className="text-xs font-semibold text-brand-600">{ingredients.length}/10 selected</p>
+                    </div>
                 </div>
                 {error && (
-                    <p className="mt-2 text-red-500 text-sm">
+                    <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <p className="text-red-600 text-sm font-medium">
                         {error}
-                    </p>
+                        </p>
+                    </div>
                 )}
             </div>
             {ingredients.length > 0 && (
                 <div className="mt-6 w-full">
-                    <h2 className="text-lg font-semibold text-brand-600 mb-3">Selected Ingredients:</h2>
-                    <div className="flex flex-wrap max-h-32 overflow-y-auto">
+                    <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span className="text-xl">🥘</span>
+                        Selected Ingredients
+                    </h2>
+                    <div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto p-4 bg-gray-50 rounded-xl border border-gray-200">
                         {ingredients.map((ingredient: Ingredient) => (
                             <Chip
                                 ingredient={ingredient}

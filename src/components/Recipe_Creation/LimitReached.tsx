@@ -27,18 +27,20 @@ const LimitReached: React.FC<LimitReachedProps> = ({
     };
 
     return (
-        <div className={`flex flex-col items-center justify-top ${fullHeight ? 'min-h-screen' : 'h-full'} bg-gray-100 p-4`}>
-            <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
+        <div className={`flex flex-col items-center justify-center ${fullHeight ? 'min-h-screen' : 'h-full'} bg-gradient-to-br from-gray-50 to-red-50 p-4`}>
+            <div className="bg-white rounded-2xl shadow-xl p-10 max-w-md text-center border border-gray-200">
                 {/* Icon */}
-                <ExclamationCircleIcon className="block m-auto h-16 w-16 text-red-500"/>
+                <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                    <ExclamationCircleIcon className="h-10 w-10 text-red-500"/>
+                </div>
                 {/* Title */}
-                <h2 className="text-2xl font-bold mb-2 text-gray-800">Limit Reached</h2>
+                <h2 className="text-3xl font-bold mb-4 text-gray-800">Usage Limit Reached</h2>
                 {/* Message */}
-                <p className="text-gray-600 mb-6">{message}</p>
+                <p className="text-gray-600 mb-8 leading-relaxed">{message}</p>
                 {/* Action Button */}
                 <Button
                     onClick={handleAction}
-                    className="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-400"
+                    className="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-8 py-3 rounded-xl hover:from-brand-700 hover:to-brand-800 focus:outline-none focus:ring-2 focus:ring-brand-400 font-semibold transition-all transform hover:scale-105 shadow-md"
                 >
                     {actionText}
                 </Button>

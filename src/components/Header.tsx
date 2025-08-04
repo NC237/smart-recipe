@@ -38,7 +38,7 @@ function Header({ user }: HeaderProps) {
             return
         }
         if (menu.name === 'About') {
-            window.open('', '_blank');
+            window.open('https://github.com/dereje/smart-recipe-generator', '_blank');
         }
         router.push(menu.route)
     }
@@ -67,7 +67,7 @@ function Header({ user }: HeaderProps) {
                                                 key={item.name}
                                                 className={classNames(
                                                     item.route === router.pathname
-                                                        ? 'bg-brand-50 text-gray-800'
+                                                        ? 'bg-brand-600 text-white'
                                                         : item.style,
                                                     'rounded-md px-3 py-2 text-sm font-medium',
                                                 )}
@@ -88,9 +88,9 @@ function Header({ user }: HeaderProps) {
                                         href="https://www.buymeacoffee.com/dereje"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="ml-4 bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-300 transition"
+                                        className="ml-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:from-amber-600 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-amber-300 transition-all transform hover:scale-105"
                                     >
-                                        ☕ Buy Me a Coffee
+                                        ☕ Buy Me a Coffee
                                     </a>
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="relative ml-3">
@@ -166,9 +166,9 @@ function Header({ user }: HeaderProps) {
                                 href="https://www.buymeacoffee.com/dereje"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-amber-500 text-white font-bold px-4 py-2 rounded-lg shadow-sm hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-300 transition"
+                                className="bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold px-4 py-2 rounded-lg shadow-sm hover:from-amber-600 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-amber-300 transition-all"
                             >
-                                ☕ Buy Me a Coffee
+                                ☕ Buy Me a Coffee
                             </a>
                         </div>
                         <div className="border-t border-brand-700 pb-3 pt-4">

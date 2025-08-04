@@ -1,7 +1,6 @@
 import { useState, useEffect, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import Image from 'next/image';
 import {
     XMarkIcon,
     ClipboardDocumentIcon,
@@ -15,8 +14,6 @@ import {
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 import DeleteDialog from './DeleteDialog';
 import { useRouter } from 'next/router';
-import audioload from '../../assets/audioload.gif';
-import audioGenerate from '../../assets/audiogenerate.gif'
 import { ExtendedRecipe } from '../../types';
 
 interface ActionPopoverProps {
@@ -57,12 +54,14 @@ export function ActionPopover({ handlers, states, data }: ActionPopoverProps) {
 
     const getAudioControls = () => {
         if (states.isLoadingAudio) {
-            return <Image
-                src={states.hasAudio ? audioload : audioGenerate}
-                alt="audio-load-gif"
-                width={220}
-                height={150}
-            />
+            return (
+                <div className="flex items-center justify-center py-4">
+                    <div className="animate-spin rounded-full h-8 w-8 border-2 border-brand-500 border-t-transparent mr-3"></div>
+                    <span className="text-sm text-gray-600">
+                        {states.hasAudio ? 'Loading audio...' : 'Generating audio...'}
+                    </span>
+                </div>
+            )
         }
         return (
             <button

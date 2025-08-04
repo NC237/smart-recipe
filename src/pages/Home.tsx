@@ -93,28 +93,39 @@ const Home = () => {
     };
 
     return (
-        <div className="flex flex-col min-h-screen items-center px-4 py-8 space-y-8">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-brand-50">
+            <div className="flex flex-col items-center px-4 py-8 space-y-8 max-w-7xl mx-auto">
+                {/* Hero Section */}
+                <div className="text-center space-y-4 py-8">
+                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
+                        Discover Amazing Recipes
+                    </h1>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Explore thousands of AI-generated recipes tailored to your taste and dietary preferences
+                    </p>
+                </div>
+
             <SearchBar searchVal={searchVal} setSearchVal={setSearchVal} handleSearch={handleSearch} totalRecipes={totalRecipes} />
             <PopularTags tags={popularTags} onTagToggle={handleTagSearch} searchVal={searchVal} />
 
             {/* Sorting Buttons */}
-            <div className="flex space-x-4 mt-4 mb-4">
+            <div className="flex space-x-4 mt-4 mb-4 bg-white rounded-2xl p-2 shadow-md border border-gray-200">
                 <button
                     onClick={() => sortRecipes('recent')}
-                    className={`disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-white flex items-center px-4 py-2 rounded shadow-md transition duration-300 ${sortOption === 'recent' ? 'bg-brand-500 text-white' : 'bg-gray-200 hover:bg-gray-300 hover:shadow-lg'
+                    className={`disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 flex items-center px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${sortOption === 'recent' ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                         }`}
                     disabled={Boolean(searchVal.trim())}
                 >
-                    <ClockIcon className="h-5 w-5 mr-2" />
+                    <ClockIcon className="h-4 w-4 mr-2" />
                     Most Recent
                 </button>
                 <button
                     onClick={() => sortRecipes('popular')}
-                    className={`disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-white flex items-center px-4 py-2 rounded shadow-md transition duration-300 ${sortOption === 'popular' ? 'bg-brand-500 text-white' : 'bg-gray-200 hover:bg-gray-300 hover:shadow-lg"'
+                    className={`disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 flex items-center px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${sortOption === 'popular' ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                         }`}
                     disabled={Boolean(searchVal.trim())}
                 >
-                    <FireIcon className="h-5 w-5 mr-2" />
+                    <FireIcon className="h-4 w-4 mr-2" />
                     Most Popular
                 </button>
             </div>
@@ -127,7 +138,12 @@ const Home = () => {
             <FloatingActionButtons />
 
             {/* Show loading indicator when fetching */}
-            {loading && <Loading />}
+            {loading && (
+                <div className="py-8">
+                    <Loading />
+                </div>
+            )}
+            </div>
         </div>
     );
 };

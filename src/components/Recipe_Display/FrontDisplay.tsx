@@ -37,46 +37,52 @@ const FrontDisplay = React.forwardRef<HTMLDivElement, FrontDisplayProps>(
     }
 
     return (
-        <div ref={ref} className="recipe-card max-w-sm bg-gradient-to-r from-slate-200 to-stone-100 border border-gray-200 rounded-lg shadow-lg mt-4 mb-2 transform transition-transform hover:scale-105 hover:shadow-lg flex flex-col h-full animate-fadeInUp">
+        <div ref={ref} className="recipe-card max-w-sm bg-white border border-gray-200 rounded-2xl shadow-lg mt-4 mb-2 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 flex flex-col h-full animate-fadeInUp overflow-hidden">
             <div className="relative w-full h-64"> {/* Add a container for the image */}
                 <Image
                     src={recipe.imgLink}
                     fill
                     alt={recipe.name}
                     style={{ objectFit: 'cover' }}
-                    className="rounded-t-lg"
+                    className="rounded-t-2xl transition-transform duration-300 hover:scale-110"
                     priority
                     sizes="auto"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-t-2xl" />
+                <div className="absolute top-4 right-4">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-gray-800">
+                        {recipe.dietaryPreference[0] || 'Recipe'}
+                    </div>
+                </div>
             </div>
-            <div className="p-5 flex-grow">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 drop-shadow-lg">{recipe.name}</h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">{recipe.additionalInformation.nutritionalInformation}</p>
+            <div className="p-6 flex-grow">
+                <h5 className="mb-3 text-xl font-bold tracking-tight text-gray-900 line-clamp-2">{recipe.name}</h5>
+                <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">{recipe.additionalInformation.nutritionalInformation}</p>
             </div>
-            <div className="mx-auto flex">
+            <div className="px-6 pb-2 flex flex-wrap gap-2">
                 {
-                    recipe.dietaryPreference.map((preference) => (
-                        <span key={preference} className="chip bg-brand-100 text-brand-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded hover:scale-110">{preference}</span>
+                    recipe.dietaryPreference.slice(0, 3).map((preference) => (
+                        <span key={preference} className="bg-gradient-to-r from-brand-100 to-brand-200 text-brand-800 text-xs font-medium px-3 py-1 rounded-full border border-brand-300">{preference}</span>
                     ))
                 }
             </div>
-            <div className="p-5">
+            <div className="p-6 pt-4 border-t border-gray-100">
                 <div className="flex items-center justify-between">
                     <Button
-                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brand-700 rounded-lg hover:bg-brand-800 focus:ring-4 focus:outline-none focus:ring-brand-300"
+                        className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-center text-white bg-gradient-to-r from-brand-600 to-brand-700 rounded-xl hover:from-brand-700 hover:to-brand-800 focus:ring-4 focus:outline-none focus:ring-brand-300 transition-all transform hover:scale-105 shadow-md"
                         onClick={() => showRecipe(recipe)}
                     >
                         See Recipe
-                        <ArrowRightCircleIcon className="block ml-2 h-5 w-5" />
+                        <ArrowRightCircleIcon className="ml-2 h-4 w-4" />
                     </Button>
                     <Button
-                        className="py-1.5 px-3 hover:text-brand-600 hover:scale-105 hover:shadow text-center border border-gray-300 rounded-md border-gray-400 h-8 text-sm flex items-center gap-1 lg:gap-2"
+                        className="py-2 px-3 hover:text-brand-600 hover:scale-110 hover:shadow-md text-center border-2 border-gray-200 rounded-xl h-10 text-sm flex items-center gap-2 transition-all bg-white hover:border-brand-300"
                         onClick={() => handleRecipeLike(recipe._id)}
                         disabled={recipe.owns}
                         data-testid="like_button"
                     >
                         {getThumbsup(recipe)}
-                        <span>{recipe.likedBy.length}</span>
+                        <span className="font-semibold">{recipe.likedBy.length}</span>
                     </Button>
                 </div>
             </div>

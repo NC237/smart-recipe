@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 /* Import modern font for headings */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* 
    Root variables for theme colors 
@@ -39,6 +39,9 @@
 */
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* 
@@ -62,6 +65,21 @@ body {
   .z-modal-top {
     z-index: 150;
   }
+  
+  /* Line clamp utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 /* 
@@ -78,15 +96,34 @@ html {
 */
 @layer base {
   h1 {
-    @apply text-3xl md:text-4xl font-bold mt-6 mb-4;
+    @apply text-3xl md:text-4xl font-bold mt-6 mb-4 tracking-tight;
     font-family: 'Inter', sans-serif;
   }
   h2 {
-    @apply text-2xl md:text-3xl font-semibold mt-6 mb-4;
+    @apply text-2xl md:text-3xl font-semibold mt-6 mb-4 tracking-tight;
     font-family: 'Inter', sans-serif;
   }
   h3 {
-    @apply text-xl md:text-2xl font-semibold mt-4 mb-2;
+    @apply text-xl md:text-2xl font-semibold mt-4 mb-2 tracking-tight;
     font-family: 'Inter', sans-serif;
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #10b981, #059669);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #059669, #047857);
 }
